@@ -2,6 +2,7 @@ var express = require('express')
 var app = express();
 
 app.use(express.static('public'));
+//app.use('/static', express.static(__dirname))
 
 app.get('/index.htm', function (req, res) {
    res.sendFile( __dirname + "/" + "index.htm" );
