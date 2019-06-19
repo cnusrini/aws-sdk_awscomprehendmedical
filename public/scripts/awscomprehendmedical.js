@@ -1,9 +1,9 @@
 const config = require('./config');
 
 function putResource(){
-console.log('putResource');
 
-let comprehendmedical = new AWS.ComprehendMedical({
+var apiVersion = {apiVersion: '2018-10-30'}
+var comprehendmedical = new AWS.ComprehendMedical({
   region: config.REGION,
   apiVersions: config.APIVERSION,
   credentials: {
@@ -11,19 +11,19 @@ let comprehendmedical = new AWS.ComprehendMedical({
     secretAccessKey: config.SECRETACCESSKEY
   }
 });
-
-//console.log('comprehendmedical',comprehendmedical);
 var uiinput = document.getElementById('inputtext').value
-var params = {Text: uiinput };
+var params = {
+  Text: uiinput
+};
 comprehendmedical.detectEntities(params, function (failure,sucess) {
   if (failure){
-    console.log('failure', failure);
-  } // an error occurred
+    console.log('failure', failure.stack);
+  }
   else{
-    console.log('comprehendMedical: ' + JSON.stringify(sucess));
-    document.getElementById('readvalue').value = sucess;
-  }           // successful response
-});
+     console.log('sucess',JSON.stringify(sucess));
+   }
 
+});
+return false;
 
 }
